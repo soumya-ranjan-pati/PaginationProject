@@ -1,0 +1,41 @@
+<html>
+     <body bgcolor="#ff1493">
+        <table align="center" border="0" width="400px">
+          <tr>
+
+              <th style="font-size: 40px;font-family: Chiller;background-color: navy;color: gold">Mobile World</th>
+          </tr>
+           <tr>
+               {% for x in data %}
+                   <tr>
+                    <th style="background-color: chartreuse">
+                        <img src="{{ x.photo.url }}" width="200px" height="200px">
+                    </th>
+                   </tr>
+               {% endfor %}
+           </tr>
+
+           <tr>
+               <th style="font-family: Arial;background-color: crimson;color: black;font-size: 20px" >
+                   {% if data.has_previous %}
+                   <a href="{% url 'save_product' %}?page_no={{ data.previous_page_number }}">
+                       previous
+                   </a>
+                   {% endif %}
+                    {% for x in data.paginator.page_range %}
+                       <a href="{% url 'save_product' %}?page_no={{ x }}">
+                           {{ x }}
+                       </a>
+                     {% endfor %}
+
+                   {% if data.has_next %}
+                    <a href="{% url 'save_product' %}?page_no={{ data.next_page_number }}">
+                        next
+                    </a>
+
+                   {% endif %}
+               </th>
+           </tr>
+        </table>
+     </body>
+</html>
